@@ -2,6 +2,5 @@
 
 ---
 
-/> [!NOTE]
-
+> [!NOTE]
 > just created repo...
