@@ -1,0 +1,115 @@
+@startuml uml_a11
+!pragma layout smetana
+skinparam backgroundColor white
+skinparam defaultFontName Geist
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 45
+hide circle
+hide empty members
+
+interface ISensor
+{
+  + ReadValue(): double
+  + GetUnit(): string
+}
+
+class LegacySmokeDetector <<sealed>>
+{
+  - smokeLevel: int
+  + LegacySmokeDetector(smokelevel: int)
+  + GetSmokeLevel(): int
+  + GetDescription(): string
+  + SetSmokeLevel(value: int): void
+}
+
+class SmokeSensorAdapter
+{
+  - legacy: LegacySmokeDetector
+  + SmokeSensorAdapter(legacy: LegacySmokeDetector)
+  + ReadValue(): double
+  + GetUnit(): string
+}
+
+class AlertEvent <<record>>
+{
+  + SensorName: string
+  + Value: double
+  + Unit: string
+  + Severity: string
+  + OccurredAt: DateTime
+}
+
+interface IAlertObserver
+{
+  + Update(alertEvent: AlertEvent): void
+}
+
+class SensorMonitor
+{
+  - observers: List<IAlertObserver>
+  + Attach(observer : IAlertObserver): void
+  + Detach(observer : IAlertObserver): void
+  + CheckSensor(sensorName: string, sensor: ISensor): void
+  - Notify (alertEvent : AlertEvent): void 
+}
+
+class EmergencyBridgeObserver
+{
+
+}
+
+interface IEmergencyMediator
+{
+
+}
+
+class EmergencyMediator
+{
+
+}
+
+class DashboardObserver
+{
+
+}
+
+class EmailAlertObserver
+{
+
+}
+
+class AuditLogObserver
+{
+
+}
+
+class Alarm
+{
+
+}
+
+class DoorController
+{
+
+}
+
+class VentilationController
+{
+
+}
+
+AlertEvent <.. SensorMonitor : creates
+AlertEvent <.. IAlertObserver : receives
+SensorMonitor o-> IAlertObserver : observers
+DashboardObserver ..|> IAlertObserver
+EmailAlertObserver ..|> IAlertObserver
+AuditLogObserver ..|> IAlertObserver
+EmergencyBridgeObserver ..|> IAlertObserver
+
+LegacySmokeDetector --* SmokeSensorAdapter : has-a
+SmokeSensorAdapter ..|> ISensor : implements
+SensorMonitor ..> ISensor : receives
+@enduml
