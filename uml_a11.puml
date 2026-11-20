@@ -19,7 +19,7 @@ interface ISensor
 class LegacySmokeDetector <<sealed>>
 {
   - smokeLevel: int
-  + LegacySmokeDetector(smokelevel: int)
+  + LegacySmokeDetector(smokeLevel: int)
   + GetSmokeLevel(): int
   + GetDescription(): string
   + SetSmokeLevel(value: int): void
@@ -58,47 +58,63 @@ class SensorMonitor
 
 class EmergencyBridgeObserver
 {
-
+  - mediator : IEmergencyMediator
+  + EmergencyBridgeObserver(mediator : IEmergencyMediator)
+  + Update(alertEvent : AlertEvent) : void
 }
 
 interface IEmergencyMediator
 {
-
+  + Notify(sender : object, eventCode : string): void
 }
 
 class EmergencyMediator
 {
+  - alarm : Alarm
+  - door : DoorController
+  - ventilation : VentilationController
 
+  + EmergencyMediator(alarm : Alarm, door : DoorController, ventilation  : VentilationController)
+  + Notify(sender : object, eventCode : string) : void
 }
 
 class DashboardObserver
 {
-
+  + Update(alertEvent : AlertEvent) : void
 }
 
 class EmailAlertObserver
 {
-
+  + Update(alertEvent : AlertEvent) : void
 }
 
 class AuditLogObserver
 {
-
+  + Update(alertEvent : AlertEvent) : void
 }
 
 class Alarm
 {
-
+  - mediator : IEmergencyMediator?
+  + SetMediator(mediator : IEmergencyMediator) : void
+  + Trigger() : void
+  + Reset() : void
 }
 
 class DoorController
 {
-
+  - mediator : IEmergencyMediator?
+  + SetMediator(mediator : IEmergencyMediator) : void
+  + UnlockAll() : void
+  + LockAll() : void
 }
 
 class VentilationController
 {
-
+  - mediator : IEmergencyMediator?
+  + SetMediator(mediator : IEmergencyMediator) : void
+  + Shutdown() : void
+  + Start() : void
 }
 
 AlertEvent <.. SensorMonitor : creates
@@ -109,7 +125,18 @@ EmailAlertObserver ..|> IAlertObserver
 AuditLogObserver ..|> IAlertObserver
 EmergencyBridgeObserver ..|> IAlertObserver
 
-LegacySmokeDetector --* SmokeSensorAdapter : has-a
+LegacySmokeDetector --o SmokeSensorAdapter : has-a
 SmokeSensorAdapter ..|> ISensor : implements
 SensorMonitor ..> ISensor : receives
+
+EmergencyMediator ..|> IEmergencyMediator : implements
+EmergencyBridgeObserver --> IEmergencyMediator : delegates to
+
+EmergencyMediator ..|> IEmergencyMediator : implements
+EmergencyMediator o--> Alarm
+EmergencyMediator o--> DoorController
+EmergencyMediator o--> VentilationController
+Alarm --> IEmergencyMediator : notifies
+DoorController --> IEmergencyMediator : notifies
+VentilationController --> IEmergencyMediator : notifies
 @enduml
