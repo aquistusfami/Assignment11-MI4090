@@ -19,12 +19,7 @@ public sealed class EmergencyBridgeObserver : IAlertObserver
     {
         if (alertEvent.Severity == "CRITICAL")
         {
-            mediator.Notify(this, "SMOKE_CRITICAL");
-        }
-        else if (alertEvent.Severity == "WARNING")
-        {
-            mediator.Notify(this, "SMOKE_WARNING");
+            mediator.Notify(this, "FIRE_DETECTED");
         }
     }
-
 }
