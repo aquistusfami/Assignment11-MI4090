@@ -138,4 +138,5 @@ EmergencyMediator o--> VentilationController
 Alarm --> IEmergencyMediator : notifies
 DoorController --> IEmergencyMediator : notifies
 VentilationController --> IEmergencyMediator : notifies
+ISensor -[hidden]down-> EmergencyMediator
 @enduml
