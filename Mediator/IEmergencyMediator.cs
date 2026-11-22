@@ -6,5 +6,5 @@ namespace Assignment11_MI4090.Mediator;
 
 public interface IEmergencyMediator
 {
-    public void Notify(object sender, string eventCode);
+    void Notify(object sender, string eventCode);
 }

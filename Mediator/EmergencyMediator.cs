@@ -4,7 +4,6 @@
 /****************/
 namespace Assignment11_MI4090.Mediator;
 
-
 public sealed class EmergencyMediator : IEmergencyMediator
 {
     private readonly Alarm alarm;

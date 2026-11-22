@@ -6,9 +6,9 @@ namespace Assignment11_MI4090.Adapter;
 
 public sealed class SmokeSensorAdapter : ISensor
 {
-    private readonly LegacySmokerDetector legacy;
+    private readonly LegacySmokeDetector legacy;
 
-    public SmokeSensorAdapter(LegacySmokerDetector legacy)
+    public SmokeSensorAdapter(LegacySmokeDetector legacy)
     {
         this.legacy = legacy ??
             throw new ArgumentNullException(nameof(legacy));

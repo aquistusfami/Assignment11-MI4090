@@ -2,7 +2,7 @@
 
 ### 1. Adapter nên kế thừa hay chứa `LegacySmokeDetector`?
 
-- `Adapter` chứa lớp cũ, `Adapter` chứa lớp cũ vì lớp cũ là sealed, tránh lộ `SetSmokeLevel` ra ngoài, và luôn đọc giá trị hiện tại thay vì sao chép trạng thái.
+- `Adapter` chứa lớp cũ vì lớp cũ là sealed, tránh lộ `SetSmokeLevel` ra ngoài, và luôn đọc giá trị hiện tại thay vì sao chép trạng thái.
 
 ### 2. `SensorMonitor` có nên biết `EmailAlertObserver` cụ thể không?
 

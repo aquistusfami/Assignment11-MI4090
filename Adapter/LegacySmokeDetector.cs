@@ -4,11 +4,11 @@
 /****************/
 namespace Assignment11_MI4090.Adapter;
 
-public sealed class LegacySmokerDetector
+public sealed class LegacySmokeDetector
 {
     private int smokeLevel;
 
-    public LegacySmokerDetector(int smokeLevel)
+    public LegacySmokeDetector(int smokeLevel)
     {
         this.smokeLevel = smokeLevel;
     }

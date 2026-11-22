@@ -6,6 +6,6 @@ namespace Assignment11_MI4090.Adapter;
 
 public interface ISensor
 {
-    public double ReadValue();
-    public string GetUnit();
+    double ReadValue();
+    string GetUnit();
 }

@@ -14,7 +14,7 @@ class Program
         // tc1
         try
         {
-            var legacy = new LegacySmokerDetector(735);
+            var legacy = new LegacySmokeDetector(735);
             ISensor sensor = new SmokeSensorAdapter(legacy);
 
             Console.WriteLine(sensor.ReadValue()); // output: 73.5
@@ -29,7 +29,7 @@ class Program
         // tc2
         try
         {
-            var legacy = new LegacySmokerDetector(0);
+            var legacy = new LegacySmokeDetector(0);
             ISensor sensor = new SmokeSensorAdapter(legacy);
             var monitor = new SensorMonitor();
             monitor.Attach(new DashboardObserver());
@@ -52,7 +52,7 @@ class Program
         // tc3
         try
         {
-            var legacy = new LegacySmokerDetector(0);
+            var legacy = new LegacySmokeDetector(0);
             ISensor sensor = new SmokeSensorAdapter(legacy);
             var monitor = new SensorMonitor();
             monitor.Attach(new DashboardObserver());
@@ -66,7 +66,7 @@ class Program
                 monitor.CheckSensor("D3-102", sensor);
                 Console.WriteLine($"[~] Checked level {sensor.ReadValue()}{sensor.GetUnit()}");
             }
-            Console.WriteLine("T3: Phat canh bao Warning, khong co Mediator => PASSED");
+            Console.WriteLine("T3: Phat canh bao Warning, Mediator khong kich hoat => PASSED");
         }
         catch (Exception ex)
         {
@@ -76,7 +76,7 @@ class Program
         // tc4
         try
         {
-            var legacy = new LegacySmokerDetector(0);
+            var legacy = new LegacySmokeDetector(0);
             ISensor sensor = new SmokeSensorAdapter(legacy);
             var monitor = new SensorMonitor();
             monitor.Attach(new DashboardObserver());
@@ -98,7 +98,7 @@ class Program
         // tc5
         try
         {
-            var legacy = new LegacySmokerDetector(0);
+            var legacy = new LegacySmokeDetector(0);
             ISensor sensor = new SmokeSensorAdapter(legacy);
             var monitor = new SensorMonitor();
             var dashboard = new DashboardObserver();
@@ -122,7 +122,7 @@ class Program
         // tc6
         try
         {
-            var legacy = new LegacySmokerDetector(0);
+            var legacy = new LegacySmokeDetector(0);
             ISensor sensor = new SmokeSensorAdapter(legacy);
             var monitor = new SensorMonitor();
             var dashboard = new DashboardObserver();
@@ -146,7 +146,7 @@ class Program
         // tc7
         try
         {
-            var legacy = new LegacySmokerDetector(0);
+            var legacy = new LegacySmokeDetector(0);
             ISensor sensor = new SmokeSensorAdapter(legacy);
             var monitor = new SensorMonitor();
 
@@ -174,7 +174,7 @@ class Program
         // tc8
         try
         {
-            var legacy = new LegacySmokerDetector(0);
+            var legacy = new LegacySmokeDetector(0);
             ISensor sensor = new SmokeSensorAdapter(legacy);
             var monitor = new SensorMonitor();
             monitor.Attach(new ActionObserver(e => throw new InvalidOperationException("Observer gia lap loi")));
